@@ -1,0 +1,20 @@
+apiVersion: enterprise.gloo.solo.io/v1
+kind: AuthConfig
+metadata:
+  name: oauth
+  namespace: gloo-system
+spec:
+  configs:
+  - oauth2:
+      oidcAuthorizationCode:
+        appUrl: **APP_URL here**
+        callbackPath: /callback
+        clientId: **client here** 
+        clientSecretRef:
+          name: oauth
+          namespace: gloo-system
+        issuerUrl: "**KEYCLOAK_URL**/realms/master/"
+        scopes:
+        - email
+        headers:
+          idTokenHeader: jwt
